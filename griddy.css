@@ -1,12 +1,12 @@
 body {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 14% 84%;
     column-gap: 2%;
     grid-template-rows: auto;
     grid-template-areas: 
-    "header header "
-    "sidebar main "
-    "sidebar footer ";
+    "header header"
+    "sidebar main"
+    "sidebar footer";
 }
 
 #header{
@@ -35,10 +35,10 @@ body {
 #footer{
     grid-area: footer;
     border-top: 2px solid black;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
-
-
-
 
 
 
