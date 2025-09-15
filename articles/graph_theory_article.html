@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<header>
+    <title>Alberts website</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../griddy.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</header>
+
+<body>
+    <div id="header"><h1>Graphically grasping an unsolved problem in maths.</h1></div>
+    
+    <div id="sidebar">
+        <a href="../blogposts.html"><div id = "interests" class="sidebar-item">Back to articles</div></a>
+    </div>
+
+    <div id="main">
+        <p>
+            What word comes to mind when you hear <i>"Graph"</i>? I would guess that you think of some line that represents a function like $y=x^2$, but to many mathematicians there is a second meaning to this word, one that may be better understood with the word <i>"Network"</i>. I will continue to use the word graph throughout, but keep that idea of a network at the forefront of your mind.        
+        </p>
+        <p>
+            Similarly, what comes to mind when you hear about an "open problem" in mathematics? To many people that conjures up ideas of absolutely incomprehensible mush of symbols that confound and confuse1 the people that try to work on them for centuries. Problems like Fermats Last Theorem, the Riemann Hypothesis, the Twin Prime Conjecture etc. etc.<br>
+            Yet here, I shall make a claim. That no matter your background in mathematics, there is a highly non-trivial open problem that you can understand in about the length of one article.
+        </p>
+
+        <p>
+            The problem that I have in mind relates to a sub-field of graph theory called <i>"Graph Colouring"</i>. Though this will take a little way to get to, I am sure it is understandable.
+        </p>
+
+        <h4>Some setup required</h4>
+        <p>
+            When talking about graphs it is (mathematically) natural to speak in terms of sets. Specifically to think of a graph as a pair of sets, $V,E$ where $V$ is the set of <i>vertices</i> (points) and E the set of <i>edges</i> (lines between points).<br>
+            In graph colouring then we add another set of colours, and assign to each vertex a colour.<br>
+            In this case we are concerned with the <i>minimal size</i> of the set of <i>colours</i> assigned to the <i>vertices</i> in a particular manner, this smallest size is denoted $\chi(G)$.<br>
+        </p>
+        
+        <p>
+            The way in which we are assigning colours is this: no two vertices connected with an edge can have the same colour.<br><br>
+
+            Thats pretty simple and easy to understand. Now to do the very mathsy thing and try to put numbers to this, our problem will focus on the <i>upper bound</i> (largest possible ammount) for the number of colours needed to colour a particular graph.<br>
+
+            It is very easy to prove, (and I encourage you to do so! Or at the very least think about it.) that $\chi(G) \le \Delta(G) + 1$, where $\Delta(G)$ the maximum number of connections that one node has in the graph.<br>
+            To get started, consider the graph where every vertex is connected to every other vertex and reason from there....
+        </p>
+
+        <img src="../general_assets/articles/graph_theory_OLET1605/DemonstrateAGraphVertexColouring_ManimCE_v0.19.0.gif", width="50%">
+
+
+        <p>
+           Now a similar process can be done where we colour the edges of the graph. I claim (and will concede that this is not trivial but is still cool), that $\chi'(G) = \Delta(G) \text{or} \Delta(G) + 1$. <br>
+           
+           Which is interesting, wheras before we could have a range of colours $1,2,3,...,\Delta(G)+1$, now we have just two options.
+        </p>
+
+        <img src="../general_assets/articles/graph_theory_OLET1605/DemonstrateAGraphEdgeColouring_ManimCE_v0.19.0.gif", width="50%">
+
+        <h4>The open problem</h4>
+        <p>
+            Now we reach the open problem. This is simply given a set of colours, from which both the vertices and edges are coloured following both of the restrictions above, and no vertex can share a colour with one of its edges, i.e. a red vertex can't connect to a red line. What is the minimal number of colours required in this case?
+
+            The open (though believed to be true) theorem is: $\chi''(G) \le \Delta(G) + 2$. Though this is normally phrased as $\chi''(G) = \Delta(G) + 1 \text{ or } \Delta(G) + 2$.
+        </p>
+
+        <img src="../general_assets/articles/graph_theory_OLET1605/DemonstrateAGraphTotalColouring_ManimCE_v0.19.0.gif", width="50%">
+
+        <h4>A note on computing $\chi(G)$</h4>
+        Now what we've discussed here is all well and good to give use a <i>bound</i>, but there are many cases where a bound is not good enough, and we want an actual hard number for $\chi(G)$. So how do mathematicians calculate that?<br>
+        Well I've got some pretty bad news unfortunatley. There is not a standardised way to find this number. Whilst we can know what range it must lie in, there is not a simple method to calculate $\chi(G)$ precicely.<br>
+        "But thats nonsensical!" You might say. "Surely we can just try and colour with every $n\le\Delta(G)+1$ and go from there!" Which is certainly an option, but I'll encourage you to start trying that on a graph with 1,000,000 vertices.<br>
+        Instead there are many smarter ways to get pretty close to the right answer, but not necessarily exactly bang on. Which is perhaps a beautiful part of Graph Theory, though these are purely mathematical objects, and an exact answer exists out there, the wall of computation is too high to climb, so instead of just climbing straight up the hardest mountain a mathematician can take solace in the fact that its very easy to get close to the same altitude by an easier method.<br>
+        There are a lot of algorithms for calculating $\chi(G)$, which normally do it as a side product of generating a colouring that is close to optimal. For example
+        <ul>
+            <li>
+                For trees (graphs that have no loops), and in general bipartite graphs, we know that $\chi(G) = 2$, which is possible because we can always generate a 2-colouring from the bipartition algorithm <br>
+                <cite><a href="https://arxiv.org/pdf/1505.05825">Graph colouring algorithms, TH</a></cite>
+            </li>
+            <li>
+                For a general graph a recursive approach is possible, (hinging on extra methods like a the <i>chromatic polynomial</i> not covered here)<br>
+                <cite><a href="https://arxiv.org/pdf/1505.05825">Graph colouring algorithms, TH</a></cite>
+            </li>
+            <li>
+                If one ants to generate an edge colouring (and hence find $\chi'(G)$) there is <i>Vizings algorithm</i> for that.<br>
+                <cite><a href="https://arxiv.org/pdf/1505.05825">Graph colouring algorithms, TH</a></cite>
+            </li>
+        </ul> 
+        Surrounding all of these algorithms are potential for improvement in specifc scenarios, possibility for further generalisation and considerable discussion on optimal implementation for the real world.<br>
+        Now at least you are able to keep up with a mathematician if you happen to catch them talking graph theory.
+
+
+        <h4>Survivors club</h4>
+        <p>
+            So congratulations! You can now understand an open problem in Maths!! You may be left wondering about a question of utility. For once the answer is not the usual one of pure mathematics, "the best of mathematics is that which is useless" (as coined by Hardy in "A Mathematicians Apology"). I can actually describe some uses;
+            <ul>
+                <li>
+                    A formerly open problem was the so-called "Four Colour Theorem", which was that any map (like a map of the earth) can be coloured with only 4 colours.<br>
+                    This is also notable as one of the first major proofs done using a computer!
+                </li>
+                <li>
+                    If you imagine you are trying to schedule a series of classes for students, you want to have no students to have clashes, this can be done by assigning each class a vertex and drawing a line between classes if students take both of those classes.<br>
+                    Then you can generate a valid colouring for this graph and assign all classes the colour "red" to Monday 10am, the colour "green" to Tuesday 4pm etc. This is in general a class of problems called "scheduling problems", to which techniques from edge colouring can also be applied.
+                </li>
+            </ul>
+        </p>
+    </div>
+
+
+    <div id="footer">
+        <h5>Bibliography</h5>
+        <ul>
+            <li>
+                <cite>MATH2069: Discrete Mathematics and Graph Theory, Anthony Henderson</cite> : Available from Kopystop in Glebe if interested, but not online or shareable unfortunatley.
+            </li>
+            <li>
+                <cite><a href="https://arxiv.org/pdf/1505.05825">Graph colouring algorithms, Thore Husfeldt</a></cite> : Used to refer to algorithms in a publicly searchable way
+            </li>
+            <li>
+                <cite><a href="https://github.com/ManimCommunity/manim">Manim community edition, many</a></cite> : Used to generate the gifs in this article
+            </li>
+            <li>
+                Discussion with my mother, partner, and other people in this unit.
+            </li>
+        </ul>
+
+        <h5>
+            I confirm that all work generated here is my own. Now generative AI was used in the creation of this assignment.
+        </h5>
+    </div>
+
+</body>
