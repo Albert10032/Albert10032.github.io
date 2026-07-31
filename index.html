@@ -20,13 +20,19 @@
     <div id="main">
         <p>Hello hello! I am Albert Stark, this is my website.</p>
 
-	<img src="general_assets/IMG20240629103749.jpg" style="float:right;width:35%">
+	<script type="text/javascript">
+		var piclink = new Array(2);
+		piclink[0] = "<img src='general_assets/IMG20240629103749.jpg' alt='whatever' style='float:right;border:5' height=250>"; 
+		piclink[1] = "<img src='general_assets/IMG_20260716_131344984.png' alt='whatever' style='float:right;border:5' height=250>";
+		index  = Math.floor(Math.random() * piclink.length);
+		document.write(piclink[index]);
+	</script>
 
         <p>I am third year Undergraduate student of Mathematics at the University of Sydney.</p>
+	
+	<p>Outside of maths, I like doing Judo and climbing.</p>
 
-        <p>Outside of maths, I like doing Judo and climbing. <br>
-        I also like solving/writing puzzles and am the Secretary of USYD PuzzleSoc (formerly head writer), reading, recreational programming and, if I have time, singing.
-        </p>
+	<p>I also like solving/writing puzzles (I am the Secretary of USYD PuzzleSoc and was formerly head writer), reading, recreational programming and, if I have time, singing.</p>
 
         <h4>Links to elsewhere</h4>
         If you're looking for where I am in other places then:
